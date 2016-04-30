@@ -248,7 +248,7 @@ public class LinkList<T> extends AbsList<T> implements Iterable<T>{
     }
 
    
-    public String toStirng()
+    public String toString()
     {
     	String s;
     	Lnode<T> p;
@@ -257,10 +257,13 @@ public class LinkList<T> extends AbsList<T> implements Iterable<T>{
     	s = "(";
         while(p != null)
         {
-        	s = s + p.data.toString();
+        	s += p.data.toString() +",";
         	p = p.next;
         }
+        if (!s.equals("("))
+            s = s.substring(0, s.length()-1);
         s = s + ")\n";
+        
         return s;
     }
     public Object[] toArray(){

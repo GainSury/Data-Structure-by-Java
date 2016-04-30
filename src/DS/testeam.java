@@ -36,6 +36,7 @@ public class testeam {
 //     	list.add(2317);
 //     	list.add(23545);
 //     	list.add(2543);
+//     	System.out.println(list);
 //     	Iterator<Integer> itr = list.iterator();
 //     	while(itr.hasNext())
 //     	{
@@ -77,19 +78,35 @@ public class testeam {
 //       	while(!test.isEmpty())
 //       		System.out.print(test.pop() + " ");
        	
-    	SeqQue<Integer> test = new SeqQue<Integer>(8);
-      	test.add(1);
-      	test.add(3);
-      	test.add(4);
-      	test.add(6);
-      	test.add(8);
-      	test.add(455);
-      	test.add(45);
-       	test.add(18);
-       	System.out.println("isFull?: "+ test.isFull());
-       	while(!test.isEmpty())
-       		System.out.print(test.remove() + " ");
+//    	SeqQue<Integer> test = new SeqQue<Integer>(8);
+//      	test.add(1);
+//      	test.add(3);
+//      	test.add(4);
+//      	test.add(6);
+//      	test.add(8);
+//      	test.add(455);
+//      	test.add(45);
+//       	test.add(18);
+//       	System.out.println("isFull?: "+ test.isFull());
+//       	while(!test.isEmpty())
+//       		System.out.print(test.remove() + " ");
+    	
     	 
+    	 
+    	
+    	 
+    	 HashTable<Integer> test = new HashTable<Integer>(95);
+    	 test.add(1);
+      	 test.add(3);
+      	 test.add(4);
+      	 test.add(6);
+    	 test.add(6);
+    	 test.add(6);
+      	 test.add(8);
+      	 test.add(455);
+      	 test.add(45);
+       	 test.add(18);
+     	 System.out.println(test);	 
     	 
      }
 }
