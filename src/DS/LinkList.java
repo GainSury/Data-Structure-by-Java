@@ -1,5 +1,6 @@
 package DS;
 
+import java.io.Serializable;
 import java.lang.Comparable;
 import java.util.Iterator;
 
@@ -7,7 +8,7 @@ import DS.aList;
 
 import DS.Lnode;
 
-public class LinkList<T> extends AbsList<T> implements Iterable<T>{
+public class LinkList<T> extends AbsList<T> implements Iterable<T>,Serializable{
     protected Lnode<T> first,last;
     LinkList<T>.LinkIterator itr = null;
     public LinkList(){

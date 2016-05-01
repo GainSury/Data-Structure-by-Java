@@ -1,14 +1,19 @@
 package exercise;
 
 import java.io.BufferedReader;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.IOException;
 
 import DS.LinkList;
 import DS.HashMap;
 
-class Info
+class Info implements Serializable
 {
 	public String gender;
 	public String phoneNumber;        
@@ -22,12 +27,30 @@ class Info
 	
 }
 
+class Person implements Serializable{
+	public String name;
+	public Info info;
+	Person(String name_,Info info_){
+		this.info = info_;
+		this.name = name_;
+	}
+	public String toString()
+	{
+		String s = new String(name
+				+ " " + info.gender
+				+ " " + info.phoneNumber
+				+ " " + info.email);
+		return s;
+	}
+}
+
 class ContactList
 {
 	private HashMap<String,Info> NameList;
     private LinkList<String> names = new LinkList<String>();//name sets
-	
-	
+    public LinkList<Person> persons = new LinkList<Person>();//name sets
+	static public int totalNum = 0;
+    
 	public ContactList(int num)
 	{
 		 NameList = new HashMap<String,Info>(num);
@@ -38,6 +61,10 @@ class ContactList
 	{
 	   addi(key,new Info(gender,phoneNumber,email));
 	   names.add(key);
+	   persons.add(
+			   new Person(
+					   key,new Info(gender,phoneNumber,email)));
+	   totalNum++;
 	}
 
 	private void addi(String key,Info value)
@@ -47,7 +74,13 @@ class ContactList
 	
 	public Info remove(String key)
 	{
+		totalNum--;
+		names.remove(key);
+		persons.remove(
+				new Person(
+						key,this.get(key)));
 		return NameList.remove(key);
+		
 	}
 	
 	public Info get(String key)
@@ -228,7 +261,31 @@ public class AddressBook{
     	}
 	}
 
-//	private static void Save()
+	private static void Save()
+	{
+		
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream("obj.dat"));
+			ObjectOutputStream out1 = new ObjectOutputStream(
+					new FileOutputStream("totalNum.dat"));
+			
+			out1.writeObject(list.totalNum);
+			for(Person person1:list.persons){
+				out.writeObject(person1);
+//				System.out.println(person1);
+			}
+			out.close();
+			out1.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	private static void showSubMenu(String choice)
 	{
 
@@ -249,8 +306,8 @@ public class AddressBook{
 			System.out.println(list.toString());
 			break;
 		case "4":
-			System.out.println("Desktop>Save_____________________________");
-//			Save();
+			System.out.println("Save done!");
+			Save();
 			break;
 		case "5":
 			System.out.println("\n\nbye :)");
@@ -306,8 +363,30 @@ public class AddressBook{
 	public static void main(String[] args)
     {
 		System.out.println("Welcome to your AddressBook:)\n\n");
-		list.add("¸ÉÉµßÙ", "ÄÐ", "15618725632", "gansb@3216.com");
-		System.out.println(list.toString());
+		
+		
+		try {
+//			
+			ObjectInputStream in = new ObjectInputStream(
+					new FileInputStream("obj.dat"));
+			ObjectInputStream in1 = new ObjectInputStream(
+					new FileInputStream("totalNum.dat"));
+			Person test;
+//		    test = (Person)in.readObject();
+			int totalnum = (int)in1.readObject();
+			for(int i= 0;i< totalnum;i++){
+				test = (Person)in.readObject();
+				list.add(test.name, test.info.gender, test.info.phoneNumber, test.info.email);
+			}
+			System.out.println(list);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
     	while(true)
     	{
     		
@@ -316,5 +395,6 @@ public class AddressBook{
     		
 
     	}
+		
     }
 }

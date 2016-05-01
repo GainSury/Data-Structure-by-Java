@@ -14,7 +14,10 @@ public class HashTableSq {
     		buffer[i] = (byte)i;
     	}
     	try {
-			FileOutputStream out = new FileOutputStream("a.dat");
+			DateOutput out new DataOutputStream( //基本数据类型的作用
+					new BufferdOutputStream( //数据缓冲的作用
+						new FileOutputStram("a.out")));
+    		FileOutputStream out = new FileOutputStream("a.dat");
 			out.write(buffer);
 			out.close();
 		} catch (IOException e) {

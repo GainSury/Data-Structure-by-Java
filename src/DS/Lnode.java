@@ -1,7 +1,8 @@
 package DS;
 
+import java.io.Serializable;
 
-public class Lnode<T> implements Comparable<Lnode<T>>{
+public class Lnode<T> implements Comparable<Lnode<T>>,Serializable{
 	public T data;
 	public Lnode<T> next;
 	public Lnode(T key){
