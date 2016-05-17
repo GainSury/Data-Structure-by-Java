@@ -1,5 +1,7 @@
 package DS;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 interface CallBackInterface
@@ -380,7 +382,16 @@ public class testSort {
             }
         }
                            );
-        System.out.println("\n\n"+sb.toString()+" using:"+ d/1000.0 + "s \nthe result is: "+ testSort(clone));
+//        System.out.println("\n\n"+sb.toString()+" using:"+ d/1000.0 + "s \nthe result is: "+ testSort(clone));
+        
+        try {
+        	FileWriter writer=new FileWriter("Sortdata.txt",true);
+			writer.write("\n\n"+sb.toString()+" using:"+ d/1000.0 + "s \nthe result is: "+ testSort(clone));
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static boolean testSort(Integer[] array)
 	{
@@ -395,24 +406,35 @@ public class testSort {
 	
 	public static void main(String[] args)
 	{
-		Integer N = 100000000;
-		Random random = new Random(N);
-		System.out.println("The scale of array is: "+N.toString());
-		Integer[] test = new Integer[N];
-		for (Integer i =0;i<N;i++)
+		Integer N = 1000000;
 		{
-			test[i] = random.nextInt(N);
-//			System.out.print(test[i] + " ");
+			try {
+				FileWriter writer=new FileWriter("Sortdata.txt",true);
+				
+				
+				Random random = new Random(N);
+		//		System.out.println("The scale of array is: "+N.toString());
+				writer.write("\n\n"+ "The scale of array is: "+N.toString() +"\n");
+				Integer[] test = new Integer[N];
+				for (Integer i =0;i<N;i++)
+				{
+					test[i] = random.nextInt(N);
+		//			System.out.print(test[i] + " ");
+				}
+				writer.close();
+				evaluate(test,new InsertSort());
+				evaluate(test,new SelectSort());
+				evaluate(test,new BubbleSort());
+				evaluate(test,new QuickSort());
+				evaluate(test,new ShellSort());
+				evaluate(test,new MergeSort());
+				evaluate(test,new HeapSort());
+				evaluate(test,new RadixSort(N));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
-//		evaluate(test,new InsertSort());
-//		evaluate(test,new SelectSort());
-//		evaluate(test,new BubbleSort());
-//		evaluate(test,new QuickSort());
-//		evaluate(test,new ShellSort());
-//		evaluate(test,new MergeSort());
-//		evaluate(test,new HeapSort());
-		evaluate(test,new RadixSort(N));
 	}
 
 

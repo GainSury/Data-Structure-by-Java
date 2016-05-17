@@ -1,0 +1,91 @@
+
+
+The scale of array is: 1000
+
+
+insertSort using:0.003s 
+the result is: true
+
+selectSort using:0.009s 
+the result is: true
+
+bubbleSort using:0.011s 
+the result is: true
+
+QuickSort using:0.001s 
+the result is: true
+
+shellSort using:0.004s 
+the result is: true
+
+mergeSort using:0.002s 
+the result is: true
+
+heapSort using:0.0s 
+the result is: true
+
+radixSort using:0.0s 
+the result is: true
+
+The scale of array is: 10000
+
+
+insertSort using:0.029s 
+the result is: true
+
+selectSort using:0.306s 
+the result is: true
+
+bubbleSort using:0.226s 
+the result is: true
+
+QuickSort using:0.001s 
+the result is: true
+
+shellSort using:0.031s 
+the result is: true
+
+mergeSort using:0.041s 
+the result is: true
+
+heapSort using:0.003s 
+the result is: true
+
+radixSort using:0.002s 
+the result is: true
+
+The scale of array is: 100000
+
+
+insertSort using:3.724s 
+the result is: true
+
+selectSort using:24.75s 
+the result is: true
+
+bubbleSort using:31.747s 
+the result is: true
+
+QuickSort using:0.01s 
+the result is: true
+
+shellSort using:3.219s 
+the result is: true
+
+mergeSort using:2.519s 
+the result is: true
+
+heapSort using:0.016s 
+the result is: true
+
+radixSort using:0.011s 
+the result is: true
+
+
+
+
+The scale of array is: 1000000
+
+
+insertSort using:1781.135s 
+the result is: true
