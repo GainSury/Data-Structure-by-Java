@@ -89,3 +89,12 @@ The scale of array is: 1000000
 
 insertSort using:1781.135s 
 the result is: true
+
+selectSort using:3476.662s 
+the result is: true
+
+bubbleSort using:4483.057s 
+the result is: true
+
+QuickSort using:0.167s 
+the result is: true
