@@ -35,6 +35,7 @@ public class HashMap<K,V>
     public HashMap(int len)
     {
     	ht = new HashTable<Pair<K,V>>(len);
+    
     }
     
     public void add(K key,V value)

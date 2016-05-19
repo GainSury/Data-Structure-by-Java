@@ -98,3 +98,15 @@ the result is: true
 
 QuickSort using:0.167s 
 the result is: true
+
+shellSort using:736.39s 
+the result is: true
+
+mergeSort using:171.983s 
+the result is: true
+
+heapSort using:0.39s 
+the result is: true
+
+radixSort using:0.08s 
+the result is: true

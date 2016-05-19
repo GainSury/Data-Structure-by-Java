@@ -27,7 +27,7 @@ class Info implements Serializable
 	
 }
 
-class Person implements Serializable{
+class Person implements Comparable<Person>, Serializable {
 	public String name;
 	public Info info;
 	Person(String name_,Info info_){
@@ -42,6 +42,14 @@ class Person implements Serializable{
 				+ " " + info.email);
 		return s;
 	}
+	
+
+	@Override
+	public int compareTo(Person o) {
+		// TODO Auto-generated method stub
+		return this.name.compareTo(o.name);
+	}
+	
 }
 
 class ContactList
@@ -166,6 +174,7 @@ public class AddressBook{
 		{
 			e.printStackTrace();
 		}
+		//获得成员
 		result = list.get(name);
 		if(result == null)
 			System.out.println("cannot find this person!");
@@ -238,7 +247,7 @@ public class AddressBook{
 	}
 	private static void Add()
 	{
-		System.out.println("Desktop>Add_________________________");
+		System.out.println("Desktop>Add______________________________");
 		String name,gender,email_,phoneNumber;
 		try
 		{
