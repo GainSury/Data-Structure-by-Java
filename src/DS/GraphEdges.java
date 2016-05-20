@@ -57,7 +57,7 @@ public class GraphEdges extends Graph{
 	@Override
 	public void addEdge(int i, int j, double w) {
 		// TODO Auto-generated method stub
-		edge.add(j, i, w);
+        edge.add(i, j, w);
 		if(gkind == undigraph)
 			edge.add(j, i, w);
 	}
@@ -79,12 +79,22 @@ public class GraphEdges extends Graph{
 	@Override
 	public void removeEdge(int i, int j) {
 		// TODO Auto-generated method stub
-		
+		edge.remove(i, j);
+		if(gkind == undigraph)
+			edge.remove(j, i);
 	}
 
 	@Override
 	public void removeVertex(int i) {
 		// TODO Auto-generated method stub
+		vertex .set(i, null);
+		for (int j = 0; j < edge.size(); j++) {
+			edge.remove(j, i);
+		}
+		//É¾³ý³ö±ß ´ý¶¨
+		for (int j = 0; j < edge.size(); j++) {
+			edge.remove(i, j);
+		}
 		
 	}
 

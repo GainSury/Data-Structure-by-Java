@@ -27,6 +27,11 @@ public class LinkList<T> extends AbsList<T> implements Iterable<T>,Serializable{
     	clear();
     }
     
+    public int size()
+    {
+    	return length;
+    }
+    
     
     protected Lnode<T> getNode(int i)
     {   

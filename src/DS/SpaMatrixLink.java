@@ -41,7 +41,7 @@ public class SpaMatrixLink implements Matrix{
     public LinkList<Triple> get(int k)
     {
     	if( k < 0 || k >= m)
-    		throw new IndexOutOfBoundsException("下标超出边界i="+k);
+    		throw new IndexOutOfBoundsException("下标超出边界 k="+k);
     	return rls.get(k);
     	
     }
@@ -75,7 +75,7 @@ public class SpaMatrixLink implements Matrix{
 	    int s = 0;
 	    for(int i=0;i < m;i++)
 	    {
-	    	s += s + rls.get(i).length();
+	    	s += rls.get(i).length();
 	    }
 	    return s;
 	}
