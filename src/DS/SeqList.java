@@ -114,8 +114,8 @@ public class SeqList<T> extends AbsList<T> implements aList<T>{
 	protected void insertOrder(int end,T x){
 		if(length == data.length) grow();
 		int k;
-		for(k =end-1;k>=0;k--){
-			if (compare(x,(T)data[k])<0)
+		for(k =end-1;k>=0 && compare(x,(T)data[k])<0;k--){
+
 				data[k+1] = data[k];
 		}
 		data[k+1]=x;
