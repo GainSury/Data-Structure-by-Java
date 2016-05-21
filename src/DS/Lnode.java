@@ -13,7 +13,7 @@ public class Lnode<T> implements Comparable<Lnode<T>>,Serializable{
 		data = key;
 		this.next = next;
 	}
-	public boolean equals (Object e){
+	public boolean equals(Object e){
 		Lnode<T> node = (Lnode<T>) e;
 		return data.equals(node.data);
 	}

@@ -55,7 +55,10 @@ public class GraphLink extends Graph{
 	@Override
 	public double getWeight(int i, int j) {
 		// TODO Auto-generated method stub
-		return edge.get(i, j);
+		if(i != j)
+			return edge.get(i, j);
+		else 
+			return 0;
 	}
 
 	@Override
@@ -73,6 +76,13 @@ public class GraphLink extends Graph{
 		if(gkind == undigraph)
 			edge.remove(j, i);
 	}
+	
+	public void removeEdge(String a1,String a2)
+	{
+		int index1 = vertex.indexOf(a1);
+		int index2 = vertex.indexOf(a2);
+		removeEdge(index1,index2);
+	}
 
 	@Override
 	public void removeVertex(int i) {
@@ -88,7 +98,7 @@ public class GraphLink extends Graph{
 	public int edgeCount() {
 		// TODO Auto-generated method stub
 		int edgeNum = 0;
-		int edgeTotalSize = edge.size();
+		int edgeTotalSize = edge.rls.length;
 		for(int i = 0; i < edgeTotalSize;i++)
 		{
 			edgeNum = edgeNum + edge.get(i).length();
@@ -114,6 +124,7 @@ public class GraphLink extends Graph{
 			return o.j;
 	}
 
+	
 	@Override
 	public int nextAdjVex(int v, int w) {
 		// TODO Auto-generated method stub
@@ -145,12 +156,13 @@ public class GraphLink extends Graph{
 		mg.addEdge("B", "A", 5);
 		mg.addEdge("C", "B", 5);
 		mg.addEdge("D", "B", 5);
-//		mg.addEdge("D", "E", 5);
+		mg.addEdge("D", "E", 5);
 		mg.addEdge("D", "A", 5);
-//		mg.addEdge("D", "C", 5);
+		mg.addEdge("D", "C", 5);
+		mg.removeEdge("A", "B");
 		mg.outputGraph();
 		
-		//debug 有些问题
+		
 	}
 
 }

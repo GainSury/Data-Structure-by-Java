@@ -163,10 +163,25 @@ public class GraphMatrix extends Graph{
 		mg.addEdge("B", "C", 4);
 		mg.addEdge("C", "E", 9);
 		mg.addEdge("B", "C", 5);
-		mg.addEdge("C", "E", 0);
+		mg.addEdge("C", "E", 1);
 		mg.addEdge("E", "C", 7);
 		mg.addEdge("D", "C", 7);
 		mg.addEdge("D", "E", 9);
 		mg.outputGraph();
+		System.out.println("bfs");
+		for(int i = 0; i< 5;i++)
+		{
+			System.out.print("起始点 "+mg.getVertex(i) + ", 连通分量： ");
+//			mg.dfs(mg, i);
+			mg.bfs(mg, i);
+		}
+		System.out.println("dfs");
+		for(int i = 0; i< 5;i++)
+		{
+			System.out.print("起始点 "+mg.getVertex(i) + ", 连通分量： ");
+			mg.dfs(mg, i);
+//			mg.bfs(mg, i);
+		}
+		
 	}
 }

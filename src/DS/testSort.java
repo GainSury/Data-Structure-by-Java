@@ -406,14 +406,14 @@ public class testSort {
 	
 	public static void main(String[] args)
 	{
-		Integer N = 1000000;
+		Integer N = 100000000;
 		{
 			try {
 				FileWriter writer=new FileWriter("Sortdata.txt",true);
 				
 				
 				Random random = new Random(N);
-		//		System.out.println("The scale of array is: "+N.toString());
+//				System.out.println("The scale of array is: "+N.toString());
 				writer.write("\n\n"+ "The scale of array is: "+N.toString() +"\n");
 				Integer[] test = new Integer[N];
 				for (Integer i =0;i<N;i++)
@@ -422,14 +422,14 @@ public class testSort {
 		//			System.out.print(test[i] + " ");
 				}
 				writer.close();
-				evaluate(test,new InsertSort());
-				evaluate(test,new SelectSort());
-				evaluate(test,new BubbleSort());
+//				evaluate(test,new InsertSort());
+//				evaluate(test,new SelectSort());
+//				evaluate(test,new BubbleSort());
 				evaluate(test,new QuickSort());
-				evaluate(test,new ShellSort());
-				evaluate(test,new MergeSort());
-				evaluate(test,new HeapSort());
-				evaluate(test,new RadixSort(N));
+//				evaluate(test,new ShellSort());
+//				evaluate(test,new MergeSort());
+//				evaluate(test,new HeapSort());
+//				evaluate(test,new RadixSort(N));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

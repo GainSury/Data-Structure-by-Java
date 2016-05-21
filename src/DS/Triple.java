@@ -21,8 +21,9 @@ public class Triple implements Comparable<Triple>{
 		return  "<"+ i +"," + j +"," +value+">";
 	}
 	
-	public boolean equals(Triple e)
+	public boolean equals(Object e1)
 	{
+		Triple e = (Triple)e1;
 		return (this.i == e.i && this .j == e.j);
 	}
 	

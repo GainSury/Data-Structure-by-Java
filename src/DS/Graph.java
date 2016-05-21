@@ -97,6 +97,70 @@ public abstract class Graph {
     	this.addEdge(i, j, value);
     }
     
+    public static void dfs(Graph G,int v)
+    {
+    	int vexNum = G.vertexCount();
+    	boolean[] visited = new boolean[vexNum];
+    	for (int j = 0; j < visited.length; j++) {
+			visited[j] = false;
+  		}
+    	int j = v;
+    	do{
+    		if(visited[j] == false){
+    			System.out.print("{");
+    			dfsConnect(G,j,visited);
+    			System.out.print("}");
+    		}
+    		j = (j + 1) % vexNum;
+    	}while(j != v);
+    		System.out.println();
+    }
+    
+    public static void dfsConnect(Graph G, int v, boolean[] visited)
+    {
+    	visited[v] = true;
+    	System.out.print(G.getVertex(v) + "");
+    	for(int w = G.firstAdjVex(v);w != -1; w= G.nextAdjVex(v, w))
+    		if(!visited[w])
+    			dfsConnect(G,w,visited);
+    }
+    
+    
+    public static void bfsConnect(Graph G,int v,boolean[] visited)
+    {
+    	LinkList<Integer> Q = new LinkList<Integer>();
+    	Q.add(v);
+    	while(!Q.isEmpty())
+    	{
+    		int u = Q.remove();
+    		if(!visited[u]){
+    			System.out.print(G.getVertex(u) + " ");
+    			visited[u] = true;
+    		}
+    		for (int w = G.firstAdjVex(u);w != -1;w = G.nextAdjVex(u, w))
+        		if(!visited[w])
+        			Q.add(w);
+    	}
+    }
+    
+    public static void bfs(Graph G,int v)
+    {
+    	int vertexNum = G.vertexCount();
+    	boolean[] visited = new boolean[vertexNum];
+    	for(int i = 0; i < vertexNum;i++)
+    		visited[i] = false;
+    	int j = v;
+    	do{
+    		if(visited[j] == false){
+    			System.out.print("{");
+    			bfsConnect(G,j,visited);
+    			System.out.print("}");
+    		}
+    		j = (j + 1) % vertexNum;
+    	}while(j != v);
+    	System.out.println();
+    }
+    
     public abstract void addEdge(int i,int j,double w);
     
     public abstract double getWeight(int i,int j);

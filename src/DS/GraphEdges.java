@@ -18,40 +18,43 @@ public class GraphEdges extends Graph{
 	}
     
     
-    public void addVertex(String e)
-    {
-    	
-    	double temp[][] = new double[edge.length][edge.length];
-    	vertex.add(e);
-    	int vertexNum = vertexCount();
-    	
-    	if(vertexNum > edge.length())
-    	{
-    		temp = edge;
-    		edge = new double[temp.length+10][temp.length+10];
-    	}
-    	for(int i = 0;i < temp.length;i++)
-    	{
-    		for(int j = 0;j < temp.length;j++)
-    			edge[i][j] = temp[i][j];
-    		for(int j = temp.length;j < edge.length;j++)
-    			edge[i][j] = Double.MAX_VALUE;
-    	}
-    	for(int i = temp.length; i <edge.length;i++)
-    		for(int j = 0;j < edge.length;j++)
-    			edge[i][j] = Double.MAX_VALUE;
-    }
+//    public void addVertex(String e)
+//    {
+//    	
+//    	double temp[][] = new double[edge.length][edge.length];
+//    	vertex.add(e);
+//    	int vertexNum = vertexCount();
+//    	
+//    	if(vertexNum > edge.length())
+//    	{
+//    		temp = edge;
+//    		edge = new double[temp.length+10][temp.length+10];
+//    	}
+//    	for(int i = 0;i < temp.length;i++)
+//    	{
+//    		for(int j = 0;j < temp.length;j++)
+//    			edge[i][j] = temp[i][j];
+//    		for(int j = temp.length;j < edge.length;j++)
+//    			edge[i][j] = Double.MAX_VALUE;
+//    	}
+//    	for(int i = temp.length; i <edge.length;i++)
+//    		for(int j = 0;j < edge.length;j++)
+//    			edge[i][j] = Double.MAX_VALUE;
+//    }
+//	
 	
-	@Override
-	public int inDeg(int v) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
+    
+    
+    @Override
 	public int outDeg(int v) {
 		// TODO Auto-generated method stub
-		return 0;
+		int count =0;
+		for(int k = 0; k < edgeCount();k++)
+		{
+			if(edge.get(k).i == v)
+				count++;
+		}
+		return count;
 	}
 
 	@Override
@@ -87,7 +90,7 @@ public class GraphEdges extends Graph{
 	@Override
 	public void removeVertex(int i) {
 		// TODO Auto-generated method stub
-		vertex .set(i, null);
+		vertex.set(i, null);
 		for (int j = 0; j < edge.size(); j++) {
 			edge.remove(j, i);
 		}
@@ -111,13 +114,45 @@ public class GraphEdges extends Graph{
 		int start = edge.startOfRow(v);
 		if(start >= edge.length())
 			return -1;
-		Triple
+		Triple to = edge.get(start);
+		if(to == null)
+			return -1;
+		if(to.i == v)
+			return to.j;
+		else 
+			return -1;
 	}
 
 	@Override
 	public int nextAdjVex(int v, int w) {
 		// TODO Auto-generated method stub
-		return 0;
+		int start = edge.indexOf(v, w);
+		if(start >= edge.length())
+			return -1;
+		Triple to = edge.get(start+1);
+		if(to == null)
+			return -1;
+		if(to.i == v)
+			return to.j;
+		else
+			return -1;
+		
+	}
+	
+	public int inDeg(int v)
+	{
+		if(gkind == undigraph)
+			return outDeg(v);
+		else{
+			int count = 0;
+			for(int k =0; k < edgeCount();k++)
+			{
+				if(edge.get(k).j == v)
+					count++;
+			}
+			return count;
+		}
+		
 	}
 
 }
