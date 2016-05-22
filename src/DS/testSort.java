@@ -2,6 +2,7 @@ package DS;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
 interface CallBackInterface
@@ -320,6 +321,7 @@ class HeapSort implements Sort
 //RadixSort
 class RadixSort implements Sort
 {
+	//version 1
 	int d = 0;
 	// d为数据长度
 	RadixSort(int d_)
@@ -354,14 +356,123 @@ class RadixSort implements Sort
 	            }
 	            order[i]=0;//将桶里计数器置0，用于下一次位排序
 	        }
+//	        n *= 100;
 	        n*=10;
 	        k=0;//将k置0，用于下一轮保存位排序结果
 	    }
 	    
-	}
+   }
+	
+	
 	public String toString()
 	{
 		return "radixSort";
+	}    
+	
+	
+	    
+}
+		
+
+class RadixSort1 implements Sort
+{
+
+	
+//	private static int radix;
+//	private Integer[] p;
+//	RadixSort1(int radix_){
+//		radix = radix_;
+//		p = new Integer[8];
+//		p[0] = 1;
+//		for(int i = 1;i < 8;i++)
+//			p[i] = p[i-1]*radix;
+//	}
+	private static int radix;
+	private static Integer[] p;
+	private static double[] rp;
+	RadixSort1(int radix_){
+		radix = radix_;
+		p = new Integer[8];
+		rp = new double[8];
+		p[0] = 1;
+		rp[0] = 1;
+		for(int i = 1;i < 8;i++)
+			p[i] = p[i-1]*radix;
+		for(int i = 1;i < 8;i++)
+			rp[i] = 1.0/p[i];
+	}
+	
+//	private static int radix;
+//	private static Integer[] p = {0,10,20,30,40};
+////	private double[] rp;
+//	RadixSort1(int radix_){
+//		radix = radix_;
+//	}
+//		
+	public void sort(Integer[] array)
+	{
+		radix_sort(array,array.length);
+//			System.out.println("array is "+ Arrays.toString(array));
+	}
+	
+	public final static int get_part(int n,int i)  
+	{  
+	    
+    	return (int)(n*rp[i])%radix; 
+//    	return (int)(n /p[i])%radix;
+//		return n>>p[i]&(radix-1);
+	}  
+	public final static void radix_sort(Integer[] array,int n)  
+	{  
+		Integer[] bucket= new Integer[n];
+		Integer[] count = new Integer[radix];
+		int T=n,fornum=0;
+		
+		while(T >= radix)
+		{
+			T /= radix;
+			fornum++;
+		}
+		fornum++;
+//		if (radix * radix <= n && n < radix * radix *radix) T = 3; 
+//		else if ( radix <= n && n < radix * radix )
+//			T = 2;
+//			
+//		else T = 1;
+	    for(int i=0;i < fornum;++i)  
+	    {  
+//		    	System.out.println("array is "+ Arrays.toString(array));
+	        for(int s = 0;s < radix;s++)
+	        	count[s] = 0;
+//	    	
+//		    Arrays.fill(bucket, 0);
+	        for(int j=0;j<n;++j)  
+	        {  
+	            count[get_part(array[j],i)]++;  
+	        }  
+	  
+	        for(int j=1;j<radix;++j)  
+	        {  
+	            count[j]+=count[j-1];  
+	        }  
+	  
+	       
+	        for(int j=n-1;j>=0;--j)  
+	        {  
+	            int k =get_part(array[j],i);   
+	            bucket[count[k]-1]=array[j]; 
+	            count[k]--;  
+	        }  
+//		        System.out.println("bucket is "+ Arrays.toString(bucket));
+
+	        for(int s = 0;s  < n;s++)
+	            array[s] = bucket[s];
+	    }
+	}
+			
+	public String toString()
+	{
+		return "radixSort1";
 	}
 }
 
@@ -382,11 +493,12 @@ public class testSort {
             }
         }
                            );
-//        System.out.println("\n\n"+sb.toString()+" using:"+ d/1000.0 + "s \nthe result is: "+ testSort(clone));
+//        System.out.println("clone is "+Arrays.toString(clone));
+        System.out.println("\n\n"+sb.toString()+" using:"+ d/1000.0 + "s \nthe result is: "+ testSort(clone));
         
         try {
-        	FileWriter writer=new FileWriter("Sortdata.txt",true);
-			writer.write("\n\n"+sb.toString()+" using:"+ d/1000.0 + "s \nthe result is: "+ testSort(clone));
+        	FileWriter writer=new FileWriter("RadixSortParellel.txt",true);
+//			writer.write("\n\n"+sb.toString()+" using:"+ d/1000.0 + "s \nthe result is: "+ testSort(clone));
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -406,21 +518,22 @@ public class testSort {
 	
 	public static void main(String[] args)
 	{
-		Integer N = 100000000;
+		for(Integer N = 100000000;N <= 100000000;N+=10000000)
 		{
 			try {
-				FileWriter writer=new FileWriter("Sortdata.txt",true);
+				FileWriter writer=new FileWriter("testRadixSortdata.txt",true);
 				
 				
 				Random random = new Random(N);
-//				System.out.println("The scale of array is: "+N.toString());
-				writer.write("\n\n"+ "The scale of array is: "+N.toString() +"\n");
+				System.out.println("The scale of array is: "+N.toString());
+//				writer.write("\n\n"+ "The scale of array is: "+N.toString() +"\n");
 				Integer[] test = new Integer[N];
 				for (Integer i =0;i<N;i++)
 				{
 					test[i] = random.nextInt(N);
 		//			System.out.print(test[i] + " ");
 				}
+//				System.out.print("before is "+Arrays.toString(test));
 				writer.close();
 //				evaluate(test,new InsertSort());
 //				evaluate(test,new SelectSort());
@@ -430,6 +543,7 @@ public class testSort {
 //				evaluate(test,new MergeSort());
 //				evaluate(test,new HeapSort());
 //				evaluate(test,new RadixSort(N));
+				evaluate(test,new RadixSort1(100000));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

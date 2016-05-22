@@ -1,0 +1,7 @@
+
+
+The scale of array is: 1000000
+
+
+radixSort using:0.122s 
+the result is: true

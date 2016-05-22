@@ -145,3 +145,17 @@ The scale of array is: 100000000
 
 QuickSort using:81.663s 
 the result is: true
+
+
+
+
+
+
+The scale of array is: 1000000
+
+
+QuickSort using:0.182s 
+the result is: true
+
+radixSort using:0.133s 
+the result is: true
