@@ -84,70 +84,63 @@ public class RadixSortParellel implements Sort{
 		for(int i = 0; i < 8;i++)
 		    new sortThread(array,computeOffset(i, array.length, 8));
 
-			try {
+			while(id != 8)
 				
-				
-				while(id != 8)
-					
-					Thread.sleep(20);
-				  
-				
-				new mergeThread(array,
-							   computeOffset(0, array.length, 8),
-							   computeOffset(1, array.length, 8)-1,
-							   computeOffset(2, array.length, 8)-1);
+				Thread.yield();
+			  
+			
+			new mergeThread(array,
+						   computeOffset(0, array.length, 8),
+						   computeOffset(1, array.length, 8)-1,
+						   computeOffset(2, array.length, 8)-1);
 
-				
-				new mergeThread(array,
-							  computeOffset(2, array.length, 8),
-							  computeOffset(3, array.length, 8)-1,
-							  computeOffset(4, array.length, 8)-1);
+			
+			new mergeThread(array,
+						  computeOffset(2, array.length, 8),
+						  computeOffset(3, array.length, 8)-1,
+						  computeOffset(4, array.length, 8)-1);
 
-				
-				new mergeThread(array,
-						  computeOffset(4, array.length, 8),
-						  computeOffset(5, array.length, 8)-1,
-						  computeOffset(6, array.length, 8)-1);
-				
-				new mergeThread(array,
-						  computeOffset(6, array.length, 8),
-						  computeOffset(7, array.length, 8)-1,
-						  computeOffset(8, array.length, 8)-1);
-                while(id2 != 4)
-					Thread.sleep(20);
-                
-                id2 = 0;
+			
+			new mergeThread(array,
+					  computeOffset(4, array.length, 8),
+					  computeOffset(5, array.length, 8)-1,
+					  computeOffset(6, array.length, 8)-1);
+			
+			new mergeThread(array,
+					  computeOffset(6, array.length, 8),
+					  computeOffset(7, array.length, 8)-1,
+					  computeOffset(8, array.length, 8)-1);
+			while(id2 != 4)
+				Thread.yield();
+			
+			id2 = 0;
 //				Integer[] copy1 = new Integer[computeOffset(2, array.length, 8)];
 //				for(int i = 0;i < computeOffset(2, array.length, 8);i++)
 //					copy1[i] = array[i+computeOffset(6, array.length, 8)];
 //				System.out.println(testSort.testSort(copy1));
-				
-				//merge 2
+			
+			//merge 2
 //                long start = System.currentTimeMillis(); 
-                new mergeThread(array,
-						  computeOffset(0, array.length, 8),
-						  computeOffset(2, array.length, 8)-1,
-						  computeOffset(4, array.length, 8)-1);
-				
-                new mergeThread(array,
-						  computeOffset(4, array.length, 8),
-						  computeOffset(6, array.length, 8)-1,
-						  computeOffset(8, array.length, 8)-1);
-                while(id2 != 2)
-					Thread.sleep(20);
-                id2 = 0;
+			new mergeThread(array,
+					  computeOffset(0, array.length, 8),
+					  computeOffset(2, array.length, 8)-1,
+					  computeOffset(4, array.length, 8)-1);
+			
+			new mergeThread(array,
+					  computeOffset(4, array.length, 8),
+					  computeOffset(6, array.length, 8)-1,
+					  computeOffset(8, array.length, 8)-1);
+			while(id2 != 2)
+				Thread.yield();
+			id2 = 0;
 //                long end = System.currentTimeMillis();
 //                System.out.println(end - start);
-				//merge1
-				merge(array,
-						  computeOffset(0, array.length, 8),
-						  computeOffset(4, array.length, 8)-1,
-						  computeOffset(8, array.length, 8)-1);
+			//merge1
+			merge(array,
+					  computeOffset(0, array.length, 8),
+					  computeOffset(4, array.length, 8)-1,
+					  computeOffset(8, array.length, 8)-1);
 //				mergeBlocks(array, array.length, 8, result);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	}
 	
     /** 
@@ -335,7 +328,7 @@ public class RadixSortParellel implements Sort{
 		Integer[] test;
 		
 	
-		Integer N = 100000000;
+		Integer N = 30000000;
 		try {
 			FileWriter writer=new FileWriter("RadixSortParellel.txt",true);
 			
@@ -352,8 +345,8 @@ public class RadixSortParellel implements Sort{
 //					System.out.print("before is "+Arrays.toString(test));
 			writer.close();
 			testSort.evaluate(test, new RadixSortParellel(10000));
-//			testSort.evaluate(test, new QuickSort());
-//			testSort.evaluate(test, new RadixSort1(10000));
+			testSort.evaluate(test, new QuickSort());
+			testSort.evaluate(test, new RadixSort1(10000));
 //				
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

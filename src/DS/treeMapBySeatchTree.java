@@ -78,21 +78,13 @@ public class treeMapBySeatchTree<T extends Comparable<T>,V>{
     	test.add(4, "beijing4");
     	test.add(5, "beijing5");
     	test.add(6, "beijing6");
-    	test.add(1, "beijing1");
-    	test.add(7, "beijing7");
-    	test.add(8, "beijing8");
-      	test.add(9, "beijing9");
+    
       	
       	
-      	System.out.println(test.get(1));
+      	System.out.println(test.get(6));
       	System.out.println(test.get(2));
       	System.out.println(test.get(3));
-      	System.out.println(test.get(4));
-      	System.out.println(test.get(5));
-      	System.out.println(test.get(6));
-      	System.out.println(test.get(7));
-      	System.out.println(test.get(8));
-      	System.out.println(test.get(9));
+   
       	System.out.println(test.lastKey());
       	System.out.println(test.firstKey());
     }
